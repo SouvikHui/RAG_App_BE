@@ -1,11 +1,16 @@
 from typing import List, Optional
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-from models import URLRequest, QueryRequest, QueryResponse, YT_URL
-from fetcher import load_urls, process_uploaded_file
-from yt_audio_fetcher import process_audio_upload, process_youtube_upload
-from embed_data import embed_documents, clear_vectordb
-from rag_qa import ArticleQAEngine
+# from models import URLRequest, QueryRequest, QueryResponse, YT_URL
+# from fetcher import load_urls, process_uploaded_file
+# from yt_audio_fetcher import process_audio_upload, process_youtube_upload
+# from embed_data import embed_documents, clear_vectordb
+# from rag_qa import ArticleQAEngine
+from backend.models import URLRequest, QueryRequest, QueryResponse, YT_URL
+from backend.fetcher import load_urls, process_uploaded_file
+from backend.yt_audio_fetcher import process_audio_upload, process_youtube_upload
+from backend.embed_data import embed_documents, clear_vectordb
+from backend.rag_qa import ArticleQAEngine
 
 app = FastAPI()
 
@@ -77,3 +82,4 @@ def reset_engine():
     clear_vectordb()  # Fully clears stored vectors and article data
     qa = ArticleQAEngine(vector_path=vector_path)  # Reinitialize to reflect cleared store
     return {"status": "success", "message": "Reset successful. QA engine reloaded. Please reprocess articles."}
+
